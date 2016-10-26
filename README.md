@@ -6,7 +6,7 @@ By default it will look for dictionary.txt in the current directory.
 The -d command-line option can override the dictionary name and location.
 
 ## Requirements
-Build required Maven with Java 8.
+Build requires Maven with Java 8.
 Running requires Java 8.
 
 ## Limitiations
