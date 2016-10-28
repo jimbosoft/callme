@@ -2,7 +2,13 @@ package com.example.utilities;
 
 import java.util.function.Predicate;
 
-
+/**
+ * Checks if the string has two consecutive digits
+ * @return true if it does not 
+ * 		   false if it does
+ * @author hejtmanekj
+ *
+ */
 public class ValidPhoneNrWord implements Predicate<String>
 {
 	public boolean test(String inpString)

@@ -1,14 +1,17 @@
 package com.example.callme;
 
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.processor.Dictionary;
 import com.example.processor.PhoneNumberProcessor;
 import com.example.processor.Wordsmith;
 import com.example.utilities.FileHelper;
+import com.example.utilities.StringUtility;
 import com.example.utilities.ValidPhoneNrWord;
 
 /**
@@ -20,7 +23,9 @@ public class CallMeMain
     public static void main( String[] args )
     {
     	String dictionaryFileName = "dictionary.txt";
-    	List<String> inputFiles = new ArrayList<String>();
+
+    	FileHelper fileHelper = new FileHelper();
+    	List<Reader> inputFiles = new ArrayList<Reader>();
     	for (String s: args) 
     	{
     		if (s.startsWith("-d"))
@@ -29,10 +34,18 @@ public class CallMeMain
     		}
     		else
     		{
-    			inputFiles.add(s);
+    			Reader fileReader = fileHelper.getFileReader(s);
+    			if (fileReader != null)
+    			{
+    				inputFiles.add(fileReader);
+    			}
     		}
         }
-		FileHelper fileHelper = new FileHelper();
+
+		if (inputFiles.size() == 0)
+		{
+			inputFiles.add(new InputStreamReader(System.in));
+		}
 		
 		Reader dictionaryReader = fileHelper.getFileReader(dictionaryFileName);
 		if (dictionaryReader == null)
