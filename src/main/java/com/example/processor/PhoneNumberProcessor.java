@@ -1,13 +1,8 @@
 package com.example.processor;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -22,11 +17,7 @@ public class PhoneNumberProcessor
 {
 	private final static Logger log = Logger.getLogger(PhoneNumberProcessor.class.getName());
 
-	List<String> phoneNumbers = new ArrayList<String>();
-	private Map<String, List<String>> convertedNumberMap = new HashMap<String, List<String>>();
-	private Predicate<String> validTranslationtester;
-
-	HashMap<Character, char[]> phoneNumberConversionMap = new HashMap<Character, char[]>();
+	private HashMap<Character, char[]> phoneNumberConversionMap = new HashMap<Character, char[]>();
 	
 	private void initMap()
 	{
@@ -41,10 +32,20 @@ public class PhoneNumberProcessor
 		phoneNumberConversionMap.put('9', new char[] { '9', 'W', 'X', 'Y', 'Z' });
 		phoneNumberConversionMap.put('0', new char[] { '0' });
 	}
-	public PhoneNumberProcessor(List<Reader> readerList, Predicate<String> validPhoneNrWordTranslation)
+	public PhoneNumberProcessor()
 	{
 		initMap();
-		validTranslationtester = validPhoneNrWordTranslation;
+	}
+	
+	/***
+	 * 
+	 * @param readerList
+	 * @param validPhoneNrWordTranslation
+	 */
+	public Map<String, List<String>> processPhoneNumbers(List<Reader> readerList, Predicate<String> validPhoneNrWordTranslation)
+	{
+		List<String> phoneNumbers = new ArrayList<String>();
+		Map<String, List<String>> convertedNumberMap = new HashMap<String, List<String>>();
 		
 		FileHelper fileHelper = new FileHelper();
 				
@@ -54,7 +55,20 @@ public class PhoneNumberProcessor
 			fileHelper.processInputFiles(reader, phoneNumbersPerFile, StringUtility.numberOnly);
 			phoneNumbers.addAll(phoneNumbersPerFile);
 		}
+		for (String phoneNumber : phoneNumbers)
+		{
+			List<String> validWordList = getPossbileCombinations(phoneNumber).stream()
+					.filter(validPhoneNrWordTranslation)
+					.collect(Collectors.toList());
+			
+			if (validWordList.size() > 0)
+			{
+				convertedNumberMap.put(phoneNumber, validWordList);
+			}
+		}
+		return convertedNumberMap;
 	}
+	
 	/***
 	 * 
 	 * @param inputNumber
@@ -69,26 +83,12 @@ public class PhoneNumberProcessor
 			return words;
 		}
 
-		helper(words, new StringBuilder(), inputNumber, 0);
+		convert(words, new StringBuilder(), inputNumber, 0);
 		
 		return words;
 	}
-	/***
-	 * 
-	 * @param wordCombi
-	 * @return
-	 */
-	public boolean isValidCombination(String wordCombi)
-	{
-		return validTranslationtester.test(wordCombi);
-	}
-	
-	public Map<String, List<String>> getWordMap()
-	{
-		return convertedNumberMap;
-	}
-
-	private void helper(List<String> result, StringBuilder sb, String digits, int index)
+		
+	private void convert(List<String> result, StringBuilder sb, String digits, int index)
 	{
 		if (index >= digits.length())
 		{
@@ -102,7 +102,7 @@ public class PhoneNumberProcessor
 		for (int i = 0; i < arr.length; i++)
 		{
 			sb.append(arr[i]);
-			helper(result, sb, digits, index + 1);
+			convert(result, sb, digits, index + 1);
 			sb.deleteCharAt(sb.length() - 1);
 		}
 	}

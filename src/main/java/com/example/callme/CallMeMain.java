@@ -3,21 +3,15 @@ package com.example.callme;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import com.example.processor.Dictionary;
 import com.example.processor.PhoneNumberProcessor;
 import com.example.processor.Wordsmith;
 import com.example.utilities.FileHelper;
-import com.example.utilities.StringUtility;
 import com.example.utilities.ValidPhoneNrWord;
 
-/**
- * Hello world!
- *
- */
 public class CallMeMain 
 {
     public static void main( String[] args )
@@ -56,7 +50,9 @@ public class CallMeMain
 		}
 		
 		Dictionary dictionary = new Dictionary(dictionaryReader);
-    	PhoneNumberProcessor phoneNumbers = new PhoneNumberProcessor(inputFiles, new ValidPhoneNrWord());
-    	Wordsmith converter = new Wordsmith(phoneNumbers.getWordMap(), dictionary);
+    	PhoneNumberProcessor phoneNumberProcessor = new PhoneNumberProcessor();
+    	Map<String, List<String>> phoneNumberWordMap 
+    			= phoneNumberProcessor.processPhoneNumbers(inputFiles, new ValidPhoneNrWord());
+    	Wordsmith converter = new Wordsmith(phoneNumberWordMap, dictionary);
      }
 }
