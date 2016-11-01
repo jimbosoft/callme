@@ -12,7 +12,7 @@ import com.example.utilities.StringUtility;
  * @author hejtmanekj
  *
  */
-public class DictionaryService
+public class DictionaryService implements Dictionary
 {
 	private FileHelper fileHelper = new FileHelper();
 	private HashSet<String> dictionary = new HashSet<String>();
