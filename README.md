@@ -28,11 +28,11 @@ It uses Apache maven as a build system, hence maven build commands, using java 8
     if no file option is used, it will read from stdin. 
     Enter "quit" (not case sensitive) to indicate the end of the manual phone number entry
 
-When reading from stdin, "QUIT" is used to indicate end of entry, as the use of EOF differs between operating systems and produced strange results in cygwin. 
+When reading from stdin, "QUIT" is used to indicate end of entry. This was done because the use of EOF differs between operating systems and produced strange results in cygwin. 
 
 If NO dictionary is specified, using the -d dictionary option, the program will look for a dictionary file called dictionary.txt in the local directory.
 
 ## Choice of challenge
 
- I only had the choice between 1-800-CODING-CHALLENGE and the Vehicle Survey Coding Challenge. The former seemed easy to understand and  an interesting challenge. I had fun solving it and got a bit side tracked with different ways to implement it.
+ I only had the choice between 1-800-CODING-CHALLENGE and the Vehicle Survey Coding Challenge. The former seemed easy to understand and  more interesting. I had fun solving it and got a bit side tracked with different ways to implement it.
 
