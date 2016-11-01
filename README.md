@@ -30,7 +30,7 @@ It uses Apache maven as a build system, hence maven build commands, using java 8
 
 When reading from stdin, "QUIT" is used to indicate end of entry. This was done because the use of EOF differs between operating systems and produced strange results in cygwin. 
 
-If NO dictionary is specified by using the -d dictionary command line option, the program will look for a dictionary file called dictionary.txt in the local directory.
+If NO dictionary is specified by using the -d dictionary command line option, the program will look for a dictionary file called dictionary.txt in the local directory. Please be aware no dictionary.txt is included and must be added before running the app.
 
 ## Choice of challenge
 
