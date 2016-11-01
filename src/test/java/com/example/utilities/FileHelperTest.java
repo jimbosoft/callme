@@ -36,6 +36,10 @@ public class FileHelperTest
 			file = new File(testFileName);
 			file.createNewFile();
 
+			bf = fileHelper.getFileReader(null);
+			assertTrue(bf == null);
+			bf = fileHelper.getFileReader("");
+			assertTrue(bf == null);
 			bf = fileHelper.getFileReader(testFileName);
 			assertTrue(bf != null);
 			
@@ -61,10 +65,6 @@ public class FileHelperTest
 				System.out.print("Deleting test file failed " + ex.getMessage());
 			}
 		}
-		bf = fileHelper.getFileReader(null);
-		assertTrue(bf == null);
-		bf = fileHelper.getFileReader("");
-		assertTrue(bf == null);
 	}
 	
 	@Test

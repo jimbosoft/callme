@@ -11,6 +11,9 @@ import java.util.function.Predicate;
  */
 public class ValidPhoneNrWord implements Predicate<String>
 {
+	/**
+	 * Returns true if the word contains no consecutive digits
+	 */
 	public boolean test(String inpString)
 	{
 		if (inpString == null || inpString.length() == 0)
