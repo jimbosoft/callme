@@ -11,12 +11,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.example.processor.PhoneNumberProcessor;
+import com.example.processor.PhoneWordGeneratorService;
 import com.example.utilities.ValidPhoneNrWord;
 
-public class PhoneNumberProcessorTest
+public class PhoneWordGeneratorServiceTest
 {
-	PhoneNumberProcessor phoneNumbers = new PhoneNumberProcessor();
+	PhoneWordGeneratorService phoneNumbers = new PhoneWordGeneratorService();
 	
 	@Test
 	public void getPossbileCombinationsTest()
