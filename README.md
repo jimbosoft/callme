@@ -34,5 +34,5 @@ If NO dictionary is specified by using the -d dictionary command line option, th
 
 ## Choice of challenge
 
- I only had the choice between 1-800-CODING-CHALLENGE and the Vehicle Survey Coding Challenge. The former seemed easy to understand and  more interesting. I had fun solving it and got a bit side tracked with different ways to implement it.
+ I only had the choice between 1-800-CODING-CHALLENGE and the Vehicle Survey Coding Challenge. The former seemed easy to understand and  more interesting. I had fun solving it and got a bit side tracked with different ways to implement a solution.
 
